@@ -1,4 +1,6 @@
-﻿namespace FountainObjects;
+﻿using System.Reflection.Metadata;
+
+namespace FountainObjects;
 
 public class Map
 {
@@ -17,16 +19,62 @@ public class Map
 
     public Tile? GetTile(Position position) => IsPointInside(position) ? WorldMap[position.X, position.Y] : null;
 
+    public Entity? GetEntityByTile(Position position)
+    {
+        if (GetTile(new Position(position.X, position.Y)) == null)
+        {
+            return null;
+        }
+
+        if (WorldMap[position.X, position.Y].Entity == null)
+        {
+            return null;
+        }
+        return WorldMap[position.X, position.Y].Entity;
+    }
+
+    public void TryPlaceEntity(Position position,  Entity? entity)
+    {
+        if (GetTile(new Position(position.X, position.Y)) == null)
+        {
+            Console.WriteLine("No tile found, cannot place entity.");
+            return;
+        }
+        if (entity == null)
+        {
+            Console.WriteLine("No entity found, cannot place entity.");
+            return;
+        }
+
+        if (GetEntityByTile(new Position(position.X, position.Y)) != null)
+        {
+            Console.WriteLine("Tile is occupied!");
+            return;
+        }
+        WorldMap[position.X, position.Y].Entity = entity;
+    }
+
     public void GenerateMap()
     {
+        var player = new Player("Player");
+        TryPlaceEntity(new Position(0, 0), player);
         for (int i = 0; i < MapWidth; i++)
         {
             for (int j = 0; j < MapHeight; j++)
             {
+                if (i == 0 && j == 0) continue;
+                
                 if (GetTile(new Position(i, j)) == null)
                 {
                     WorldMap[i, j] = new Tile();
                 }
+                
+                // if (GetEntityByTile(new Position(i, j)) != null)
+                // {
+                //     continue;
+                // }
+
+                
             }
         }
     }
