@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 
 namespace FountainObjects;
 
@@ -15,9 +16,9 @@ public class Map
         WorldMap = new Tile[MapWidth, MapHeight];
     }
     
-    public bool IsPointInside (Position position) => position.X >= 0 &&  position.X < MapWidth && position.Y >= 0 && position.Y < MapHeight;
+    public bool IsPositionInside (Position position) => position.X >= 0 &&  position.X < MapWidth && position.Y >= 0 && position.Y < MapHeight;
 
-    public Tile? GetTile(Position position) => IsPointInside(position) ? WorldMap[position.X, position.Y] : null;
+    public Tile? GetTile(Position position) => IsPositionInside(position) ? WorldMap[position.X, position.Y] : null;
 
     public Entity? GetEntityByTile(Position position)
     {
@@ -52,6 +53,42 @@ public class Map
             return;
         }
         WorldMap[position.X, position.Y].Entity = entity;
+    }
+
+    public void TryUpdatePosition(Position position, Entity? entity)
+    {
+        if (entity == null)
+        {
+            Console.WriteLine("No entity found, cannot update position.");
+            return;
+        }
+        if (GetTile(new Position(position.X, position.Y)) == null)
+        {
+            Console.WriteLine("No tile found, cannot update position.");
+            return;
+        }
+        
+        Position newPosition = new Position(position.X + entity.Position.X, position.Y + entity.Position.Y);
+
+        if (!IsPositionInside(position) || !IsPositionInside(newPosition))
+        {
+            Console.WriteLine("Position is out of bounds, cannot update position.");
+            return;
+        }
+
+        if (GetEntityByTile(newPosition) != null)
+        {
+            Console.WriteLine("Tile is occupied!");
+            return;
+        }
+        WorldMap[newPosition.X, newPosition.Y].Entity = entity;
+        WorldMap[entity.Position.X, entity.Position.Y].Entity = null;
+        WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition);
+        
+        
+        
+        
+        
     }
 
     public void GenerateMap()
