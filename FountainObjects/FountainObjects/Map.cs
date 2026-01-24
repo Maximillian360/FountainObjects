@@ -84,11 +84,6 @@ public class Map
         WorldMap[newPosition.X, newPosition.Y].Entity = entity;
         WorldMap[entity.Position.X, entity.Position.Y].Entity = null;
         WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition);
-        
-        
-        
-        
-        
     }
 
     public void GenerateMap()
@@ -115,4 +110,6 @@ public class Map
             }
         }
     }
+
+
 }

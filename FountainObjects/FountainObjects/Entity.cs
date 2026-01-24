@@ -7,14 +7,16 @@ public abstract class Entity
     public Type Type { get; private set; }
     public int MaxHealth { get; private set; }
     public int Health  { get; private set; }
+    public char Glyph { get; init; }
     public Position Position { get; private set; }
     private static int Counter { get; set; } = 1;
 
-    public Entity (string name, Type type, int maxHealth , Position position)
+    public Entity (string name, Type type, int maxHealth , Position position, char glyph = '@')
     {
         Id = Counter;
         Name = name;
         Type = type;
+        Glyph = glyph;
         MaxHealth = maxHealth;
         Health = MaxHealth;
         Position = position;

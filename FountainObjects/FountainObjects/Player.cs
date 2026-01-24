@@ -2,7 +2,7 @@
 
 public class Player : Entity
 {
-    public Player(string name) : base(name: name, type: Type.Player, maxHealth: 1,
+    public Player(string name) : base(name: name, type: Type.Player, maxHealth: 1, glyph: '@',
         position: new Position(0,0))
     {
         
