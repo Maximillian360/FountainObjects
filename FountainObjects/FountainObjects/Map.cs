@@ -86,6 +86,20 @@ public class Map
         WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition);
     }
 
+    public void SenseNearbyTiles(Position position)
+    {
+        for (int i = 0; i < 3 ; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (i == 1 && j == 1) continue;
+                Tile? checkTile = GetTile(new Position(position.X - i - 1, position.Y - j - 1));
+                if (checkTile == null) continue;
+                
+            }
+        }
+    }
+
     public void GenerateMap()
     {
         var player = new Player("Player");
@@ -98,7 +112,7 @@ public class Map
                 
                 if (GetTile(new Position(i, j)) == null)
                 {
-                    WorldMap[i, j] = new Tile();
+                    WorldMap[i, j] = new GroundTile();
                 }
                 
                 // if (GetEntityByTile(new Position(i, j)) != null)
