@@ -93,6 +93,7 @@ public class Map
             for (int j = 0; j < 3; j++)
             {
                 if (i == 1 && j == 1) continue;
+                if (!IsPositionInside(new Position(position.X + i - 1, position.Y + j - 1))) continue;
                 Tile? checkTile = GetTile(new Position(position.X - i - 1, position.Y - j - 1));
                 if (checkTile == null) continue;
                 

@@ -3,6 +3,7 @@
 public abstract class Tile
 {
     public Entity? Entity { get; set; }
+    public string TileMessage { get; set; } = "Base Tile Message";
     
     public Tile (Entity? entity = null)
     {
@@ -11,6 +12,6 @@ public abstract class Tile
 
     public virtual void OnTileEntered()
     {
-        
+        Console.WriteLine("Tile Entered Base Method.");
     }
 }
