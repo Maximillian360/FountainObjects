@@ -8,6 +8,14 @@ public class Player : Entity
         
     }
 
+    // public override void PositionUpdate(Position newPosition, Tile? tile)
+    // {
+    //     base.PositionUpdate(newPosition, tile);
+    //     string message = tile.OnTileEntered();
+    //     Console.WriteLine(message);
+    //     Console.WriteLine("awsdjlasjdlkasjkdlasldjlasdas");
+    // }
+
     public Position TakePosition()
     {
         while (true)

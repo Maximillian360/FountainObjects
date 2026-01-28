@@ -51,7 +51,7 @@ public class Map
         return null;
     }
 
-    public void TryPlaceEntity(Position position,  Entity? entity)
+    public void TryPlaceEntity(Position position, Entity? entity)
     {
         if (GetTile(new Position(position.X, position.Y)) == null)
         {
@@ -70,6 +70,7 @@ public class Map
             return;
         }
         WorldMap[position.X, position.Y].Entity = entity;
+        WorldMap[position.X, position.Y].Entity.PositionUpdate(position, GetTile(position));
     }
 
     public void TryUpdatePosition(Position position, Entity? entity)
@@ -100,7 +101,9 @@ public class Map
         }
         WorldMap[newPosition.X, newPosition.Y].Entity = entity;
         WorldMap[entity.Position.X, entity.Position.Y].Entity = null;
-        WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition);
+        WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition, GetTile(newPosition));
+        // string message = WorldMap[newPosition.X, newPosition.Y].OnTileEntered();
+        // Console.WriteLine(message);
     }
 
     public void SenseNearbyTiles(Position position)

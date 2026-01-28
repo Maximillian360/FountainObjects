@@ -22,8 +22,13 @@ public abstract class Entity
         Position = position;
         Counter++;
     }
-    
-    public void PositionUpdate(Position newPosition) => Position = newPosition; 
+
+    public void PositionUpdate(Position newPosition, Tile? tile)
+    {
+        Position = newPosition;
+        string message = tile.OnTileEntered();
+        Console.WriteLine(message);
+    }
     
 }
 

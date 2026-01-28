@@ -3,13 +3,12 @@
 public class Entrance : Tile
 {
     private bool _isExitActive = false;
-    public string EntranceMessage { get; set; } = "You see light in this room coming from outside the cavern. This is the entrance.";
-    
-    
-    public override void OnTileEntered()
+
+    public Entrance()
     {
-        Console.WriteLine(EntranceMessage);
+        EnteredMessage = "You see light in this room coming from outside the cavern. This is the entrance.";
     }
+    
 
     public void ExitActivated()
     {
