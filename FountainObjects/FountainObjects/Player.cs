@@ -8,7 +8,7 @@ public class Player : Entity
         
     }
 
-    public Position TakeDirection()
+    public Position TakePosition()
     {
         while (true)
         {
@@ -27,7 +27,7 @@ public class Player : Entity
                 continue;
             }
 
-            Position direction = input switch
+            Position position = input switch
             {
                 "north" => new Position(-1, 0),
                 "south" => new Position(1, 0),
@@ -36,7 +36,7 @@ public class Player : Entity
                 _ => new Position(0, 0)
             };
             
-            return direction;
+            return position;
         }
     }
     

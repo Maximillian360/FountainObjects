@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/zulphix/RiderProjects/FountainObjects/FountainObjects/FountainObjects/FountainObjects.csproj": {}
+    "C:\\Users\\blyth\\RiderProjects\\FountainObjects\\FountainObjects\\FountainObjects\\FountainObjects.csproj": {}
   },
   "projects": {
-    "/home/zulphix/RiderProjects/FountainObjects/FountainObjects/FountainObjects/FountainObjects.csproj": {
+    "C:\\Users\\blyth\\RiderProjects\\FountainObjects\\FountainObjects\\FountainObjects\\FountainObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/zulphix/RiderProjects/FountainObjects/FountainObjects/FountainObjects/FountainObjects.csproj",
+        "projectUniqueName": "C:\\Users\\blyth\\RiderProjects\\FountainObjects\\FountainObjects\\FountainObjects\\FountainObjects.csproj",
         "projectName": "FountainObjects",
-        "projectPath": "/home/zulphix/RiderProjects/FountainObjects/FountainObjects/FountainObjects/FountainObjects.csproj",
-        "packagesPath": "/home/zulphix/.nuget/packages/",
-        "outputPath": "/home/zulphix/RiderProjects/FountainObjects/FountainObjects/FountainObjects/obj/",
+        "projectPath": "C:\\Users\\blyth\\RiderProjects\\FountainObjects\\FountainObjects\\FountainObjects\\FountainObjects.csproj",
+        "packagesPath": "C:\\Users\\blyth\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\blyth\\RiderProjects\\FountainObjects\\FountainObjects\\FountainObjects\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/zulphix/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\blyth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/zulphix/.dotnet/sdk/9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

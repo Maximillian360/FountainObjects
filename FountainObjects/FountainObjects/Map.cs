@@ -5,18 +5,18 @@ namespace FountainObjects;
 
 public class Map
 {
-    public int MapHeight { get; private set; }
-    public int MapWidth { get; private set; }
+    public int WorldMapCols { get; private set; }
+    public int WorldMapRows { get; private set; }
     public Tile[,] WorldMap { get; private set; }
 
-    public Map(int mapHeight, int mapWidth)
+    public Map(int worldMapCols, int worldMapRows)
     {
-        MapHeight = mapHeight;
-        MapWidth = mapWidth;
-        WorldMap = new Tile[MapWidth, MapHeight];
+        WorldMapCols = worldMapCols;
+        WorldMapRows = worldMapRows;
+        WorldMap = new Tile[WorldMapRows, WorldMapCols];
     }
     
-    public bool IsPositionInside (Position position) => position.X >= 0 &&  position.X < MapWidth && position.Y >= 0 && position.Y < MapHeight;
+    public bool IsPositionInside (Position position) => position.X >= 0 &&  position.X < WorldMapRows && position.Y >= 0 && position.Y < WorldMapCols;
 
     public Tile? GetTile(Position position) => IsPositionInside(position) ? WorldMap[position.X, position.Y] : null;
 
@@ -104,16 +104,22 @@ public class Map
     public void GenerateMap()
     {
         var player = new Player("Player");
+        WorldMap[0, 0] = new Entrance();
         TryPlaceEntity(new Position(0, 0), player);
-        for (int i = 0; i < MapWidth; i++)
+        for (int i = 0; i < WorldMapRows; i++)
         {
-            for (int j = 0; j < MapHeight; j++)
+            for (int j = 0; j < WorldMapCols; j++)
             {
                 if (i == 0 && j == 0) continue;
+
+                if (i == WorldMapRows - 1 && j == WorldMapCols - 1)
+                {
+                    WorldMap[i, j] = new Fountain();
+                }
                 
                 if (GetTile(new Position(i, j)) == null)
                 {
-                    WorldMap[i, j] = new GroundTile();
+                    WorldMap[i, j] = new Ground();
                 }
                 
                 // if (GetEntityByTile(new Position(i, j)) != null)

@@ -2,5 +2,5 @@ namespace FountainObjects;
 
 public interface IInteractable
 {
-    void Interact(Player player);
+    void Interact(Player player,  Entrance entrance);
 }
