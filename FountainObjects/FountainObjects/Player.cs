@@ -21,9 +21,9 @@ public class Player : Entity
                 continue;
             }
 
-            if (input != "north" || input != "east" || input != "south" || input != "west")
+            if (!(input == "north" || input == "east" || input == "south" || input == "west"))
             {
-                Console.WriteLine("Unrecognized input!");
+                Console.WriteLine($"Unrecognized input!: {input}");
                 continue;
             }
 

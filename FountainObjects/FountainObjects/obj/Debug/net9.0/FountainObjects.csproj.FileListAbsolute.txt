@@ -1,0 +1,15 @@
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\bin\Debug\net9.0\FountainObjects.exe
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\bin\Debug\net9.0\FountainObjects.deps.json
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\bin\Debug\net9.0\FountainObjects.runtimeconfig.json
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\bin\Debug\net9.0\FountainObjects.dll
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\bin\Debug\net9.0\FountainObjects.pdb
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.AssemblyInfoInputs.cache
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.AssemblyInfo.cs
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.csproj.CoreCompileInputs.cache
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.sourcelink.json
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.dll
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\refint\FountainObjects.dll
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.pdb
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\FountainObjects.genruntimeconfig.cache
+C:\Users\blyth\RiderProjects\FountainObjects\FountainObjects\FountainObjects\obj\Debug\net9.0\ref\FountainObjects.dll

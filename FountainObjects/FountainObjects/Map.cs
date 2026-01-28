@@ -5,18 +5,19 @@ namespace FountainObjects;
 
 public class Map
 {
-    public int WorldMapCols { get; private set; }
     public int WorldMapRows { get; private set; }
+    public int WorldMapCols { get; private set; }
     public Tile[,] WorldMap { get; private set; }
 
-    public Map(int worldMapCols, int worldMapRows)
+    public Map(int worldMapRows, int worldMapCols)
     {
-        WorldMapCols = worldMapCols;
         WorldMapRows = worldMapRows;
+        WorldMapCols = worldMapCols;
         WorldMap = new Tile[WorldMapRows, WorldMapCols];
+        GenerateMap();
     }
     
-    public bool IsPositionInside (Position position) => position.X >= 0 &&  position.X < WorldMapRows && position.Y >= 0 && position.Y < WorldMapCols;
+    public bool IsPositionInside (Position position) => position.X >= 0 &&  position.X < WorldMapCols && position.Y >= 0 && position.Y < WorldMapRows;
 
     public Tile? GetTile(Position position) => IsPositionInside(position) ? WorldMap[position.X, position.Y] : null;
 
@@ -32,6 +33,22 @@ public class Map
             return null;
         }
         return WorldMap[position.X, position.Y].Entity;
+    }
+    
+    public Entity? GetEntityById(int id)
+    {
+        for (int i = 0; i < WorldMapRows; i++)
+        {
+            for (int j = 0; j < WorldMapCols; j++)
+            {
+                Tile? tile = GetTile(new Position(i, j));
+                if (tile == null) continue;
+                if (tile.Entity == null) continue;
+                if (tile.Entity.Id != id) continue;
+                return tile.Entity;
+            }
+        }
+        return null;
     }
 
     public void TryPlaceEntity(Position position,  Entity? entity)
@@ -57,25 +74,25 @@ public class Map
 
     public void TryUpdatePosition(Position position, Entity? entity)
     {
+        Position newPosition = new Position(position.X + entity.Position.X, position.Y + entity.Position.Y);
         if (entity == null)
         {
             Console.WriteLine("No entity found, cannot update position.");
             return;
         }
-        if (GetTile(new Position(position.X, position.Y)) == null)
+        
+        if (!IsPositionInside(newPosition))
+        {
+            Console.WriteLine("Position is out of bounds, cannot update position.");
+            return;
+        }
+        
+        if (GetTile(new Position(newPosition.X, newPosition.Y)) == null)
         {
             Console.WriteLine("No tile found, cannot update position.");
             return;
         }
         
-        Position newPosition = new Position(position.X + entity.Position.X, position.Y + entity.Position.Y);
-
-        if (!IsPositionInside(position) || !IsPositionInside(newPosition))
-        {
-            Console.WriteLine("Position is out of bounds, cannot update position.");
-            return;
-        }
-
         if (GetEntityByTile(newPosition) != null)
         {
             Console.WriteLine("Tile is occupied!");

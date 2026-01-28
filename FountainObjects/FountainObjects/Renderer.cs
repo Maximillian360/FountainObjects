@@ -12,10 +12,13 @@ public class Renderer
     public void RenderWorldMap()
     {
         char padding = ' ';
-        Console.WriteLine($"Map size:  {Map.WorldMapRows}x{Map.WorldMapCols} ");
-        for (int i = 0; i < Map.WorldMapRows; i++)
+        Console.WriteLine($"Map size:  {Map.WorldMapCols}x{Map.WorldMapRows} ");
+        Player? player = Map.GetEntityById(1) as Player;
+        Console.WriteLine($"X: {player.Position.X} Y: {player.Position.Y}");
+        
+        for (int i = 0; i < Map.WorldMapCols; i++)
         {
-            for (int j = 0; j < Map.WorldMapCols; j++)
+            for (int j = 0; j < Map.WorldMapRows; j++)
             {
                 Entity? entity = Map.GetEntityByTile(new Position(i, j));
                 Console.Write(entity == null ? "| |".PadRight(4, padding) : $"|{entity.Glyph}|".PadRight(4, padding));
