@@ -1,6 +1,6 @@
 ﻿namespace FountainObjects;
 
-public readonly struct Position
+public readonly record struct Position
 {
     public int X { get; init; }
     public int Y { get; init; }

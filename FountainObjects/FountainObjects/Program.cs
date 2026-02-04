@@ -16,7 +16,7 @@ static void PlayGame()
     while (true)
     {
         renderer.RenderWorldMap();
-        Position position = player.TakePosition();
-        map.TryUpdatePosition(position, player);
+        // Position position = player.TakePlayerInput();
+        // map.TryUpdatePosition(position, player);
     }
 }
