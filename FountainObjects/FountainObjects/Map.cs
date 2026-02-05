@@ -160,5 +160,10 @@ public class Map
         }
     }
 
+    public static Map CreateEasyMap() => new Map(4, 4);
+    public static Map CreateNormalMap() => new Map(6, 6);
+    public static Map CreateHardMap() => new Map(8, 8);
+    public static Map CreateExpertMap() => new Map(10, 10);
+
 
 }

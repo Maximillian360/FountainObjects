@@ -11,6 +11,8 @@ public class Player : Entity
     {
     
     }
+
+
     
     public void TakePlayerInput(Map map)
     {
@@ -86,4 +88,12 @@ public enum ActionType
     Interact,
     Attack,
     None,
+}
+
+public enum Difficulty
+{
+    Easy,
+    Normal,
+    Hard,
+    Expert
 }

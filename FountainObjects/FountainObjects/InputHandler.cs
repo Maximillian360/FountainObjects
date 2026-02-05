@@ -30,4 +30,16 @@ public class InputHandler
             _ => new PlayerCommand(ActionType.None, new Position(0,0))
         };
     }
+
+    public Difficulty ParseDifficulty(string input)
+    {
+        return input switch
+        {
+            "1" or "easy" => Difficulty.Easy,
+            "2" or "normal" => Difficulty.Normal,
+            "3" or "hard" => Difficulty.Hard,
+            "4" or "expert" => Difficulty.Expert,
+            _ => Difficulty.Normal
+        };
+    }
 }
