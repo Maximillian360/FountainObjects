@@ -11,6 +11,7 @@ public class Renderer
     
     public void RenderWorldMap()
     {
+        // Console.Clear();
         char padding = ' ';
         Console.WriteLine($"Map size:  {Map.WorldMapCols}x{Map.WorldMapRows} ");
         Player? player = Map.GetEntityById(1) as Player;

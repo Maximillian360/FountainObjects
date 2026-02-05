@@ -21,12 +21,12 @@ public class InputHandler
     {
         return input switch
         {
-            "north" or "n" => new PlayerCommand(ActionType.Move, new Position(-1, 0)),
+            "north" or "w" => new PlayerCommand(ActionType.Move, new Position(-1, 0)),
             "south" or "s" => new PlayerCommand(ActionType.Move, new Position(1, 0)),
-            "east" or "e" => new PlayerCommand(ActionType.Move, new Position(0, 1)),
-            "west" or "w" => new PlayerCommand(ActionType.Move, new Position(0, -1)),
+            "east" or "d" => new PlayerCommand(ActionType.Move, new Position(0, 1)),
+            "west" or "a" => new PlayerCommand(ActionType.Move, new Position(0, -1)),
             "interact" or "i" => new PlayerCommand(ActionType.Interact, new Position(0, 0)),
-            "attack" or "a" => new PlayerCommand(ActionType.Attack, new Position(0, 0)),
+            "attack" or "v" => new PlayerCommand(ActionType.Attack, new Position(0, 0)),
             _ => new PlayerCommand(ActionType.None, new Position(0,0))
         };
     }

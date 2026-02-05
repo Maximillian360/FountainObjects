@@ -9,22 +9,15 @@ public class Player : Entity
     {
         
     }
-
-    // public override void PositionUpdate(Position newPosition, Tile? tile)
-    // {
-    //     base.PositionUpdate(newPosition, tile);
-    //     string message = tile.OnTileEntered();
-    //     Console.WriteLine(message);
-    //     Console.WriteLine("awsdjlasjdlkasjkdlasldjlasdas");
-    // }
+    
 
     public void TakePlayerInput(Map map)
     {
         while (true)
         {
             Console.WriteLine("");
-            Console.WriteLine("Type N or North, E or East, S or South, W  West to move. ");
-            Console.WriteLine("I or Interact, and A or Attack.");
+            Console.WriteLine("Type W or North, D or East, S or South, A  West to move. ");
+            Console.WriteLine("I or Interact, and V or Attack.");
             string? input = Console.ReadLine()?.Trim().ToLower();
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -37,7 +30,7 @@ public class Player : Entity
             switch (playerInput.Action)
             {
                 case ActionType.Move:
-                    Console.WriteLine($"{playerInput.Action} is moving");
+                    Console.WriteLine($"{playerInput.Action} is moving {playerInput.Position.X}, {playerInput.Position.Y}");
                     Move(map, playerInput.Position);
                     break;
                 case ActionType.Interact:
@@ -51,22 +44,7 @@ public class Player : Entity
                     break;
             }
 
-            // if (!(input == "north" || input == "east" || input == "south" || input == "west"))
-            // {
-            //     Console.WriteLine($"Unrecognized input!: {input}");
-            //     continue;
-            // }
-
-            // Position position = input switch
-            // {
-            //     "north" => new Position(-1, 0),
-            //     "south" => new Position(1, 0),
-            //     "east" => new Position(0, 1),
-            //     "west" => new Position(0, -1),
-            //     _ => new Position(0, 0)
-            // };
-            //
-            // return position;
+            break;
         }
     }
 
@@ -78,6 +56,15 @@ public class Player : Entity
             return;
         }
         
+    }
+
+    public void Interact(Map map, Position position)
+    {
+        
+    }
+
+    public void Attack(Map map, Position position)
+    {
         
     }
     

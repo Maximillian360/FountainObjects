@@ -3,7 +3,7 @@
 public abstract class Tile
 {
     public Entity? Entity { get; set; }
-    public string EnteredMessage { get; set; } = "A";
+    public string EnteredMessage { get; set; }
     
     public Tile (Entity? entity = null)
     {

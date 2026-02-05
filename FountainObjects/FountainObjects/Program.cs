@@ -16,6 +16,8 @@ static void PlayGame()
     while (true)
     {
         renderer.RenderWorldMap();
+        player.TakePlayerInput(map);
+        // break;
         // Position position = player.TakePlayerInput();
         // map.TryUpdatePosition(position, player);
     }
