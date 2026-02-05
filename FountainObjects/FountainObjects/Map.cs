@@ -122,9 +122,14 @@ public class Map
             {
                 if (i == 1 && j == 1) continue;
                 if (!IsPositionInside(new Position(position.X + i - 1, position.Y + j - 1))) continue;
-                Tile? checkTile = GetTile(new Position(position.X - i - 1, position.Y - j - 1));
+                Tile? checkTile = GetTile(new Position(position.X + i - 1, position.Y + j - 1));
                 if (checkTile == null) continue;
                 
+                string senseMessage = checkTile.GetSenseMessage();
+                if (senseMessage != "Nothing unusual.")
+                {
+                    Console.WriteLine(senseMessage);
+                }
             }
         }
     }

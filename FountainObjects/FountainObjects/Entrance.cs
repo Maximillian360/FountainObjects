@@ -7,13 +7,14 @@ public class Entrance : Tile, IInteractable
     public Entrance()
     {
         EnteredMessage = "You see light in this room coming from outside the cavern. This is the entrance.";
+        SenseMessage = "The exit is nearby...";
     }
     
     public void ToggleExitState()
     {
         _isExitActive = !_isExitActive;
     }
-    //
+    
     public void Interact(Player player)
     {
         if (_isExitActive == false)

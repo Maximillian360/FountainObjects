@@ -26,6 +26,7 @@ public class InputHandler
             "east" or "d" => new PlayerCommand(ActionType.Move, new Position(0, 1)),
             "west" or "a" => new PlayerCommand(ActionType.Move, new Position(0, -1)),
             "interact" or "i" => new PlayerCommand(ActionType.Interact, new Position(0, 0)),
+            "sense" or "h" => new PlayerCommand(ActionType.Sense, new Position(0, 0)),
             "attack" or "v" => new PlayerCommand(ActionType.Attack, new Position(0, 0)),
             _ => new PlayerCommand(ActionType.None, new Position(0,0))
         };

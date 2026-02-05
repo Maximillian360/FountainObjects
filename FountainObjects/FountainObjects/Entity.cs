@@ -10,6 +10,7 @@ public abstract class Entity
     public char Glyph { get; init; }
     public Position Position { get; private set; }
     private static int Counter { get; set; } = 1;
+    public string EntitySenseMessage { get; set; }
 
     public Entity (string name, Type type, int maxHealth , Position position, char glyph = '@')
     {
@@ -21,6 +22,7 @@ public abstract class Entity
         Health = MaxHealth;
         Position = position;
         Counter++;
+        EntitySenseMessage = $"Entity {Type} is nearby...";
     }
 
     public void PositionUpdate(Position newPosition, Tile? tile)

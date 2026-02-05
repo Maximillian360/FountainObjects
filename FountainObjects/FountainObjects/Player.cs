@@ -20,7 +20,7 @@ public class Player : Entity
         {
             Console.WriteLine("");
             Console.WriteLine("Type W or North, D or East, S or South, A  West to move. ");
-            Console.WriteLine("I or Interact, and V or Attack.");
+            Console.WriteLine("I or Interact, H for Sense, and V or Attack.");
             string? input = Console.ReadLine()?.Trim().ToLower();
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -37,6 +37,9 @@ public class Player : Entity
                     break;
                 case ActionType.Interact:
                     Interact(map, Position);
+                    break;
+                case ActionType.Sense:
+                    Sense(map, Position);
                     break;
                 case ActionType.Attack:
                     Console.WriteLine($"{playerInput.Action} is attacking");
@@ -75,6 +78,11 @@ public class Player : Entity
         Console.WriteLine($"Tile in Position: {position} and Type: {map.GetTile(position)} is not interactable!");
     }
 
+    public void Sense(Map map, Position position)
+    {
+        map.SenseNearbyTiles(position);
+    }
+
     public void Attack(Map map, Position position)
     {
         
@@ -87,6 +95,7 @@ public enum ActionType
     Move,
     Interact,
     Attack,
+    Sense,
     None,
 }
 

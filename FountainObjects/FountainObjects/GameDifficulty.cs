@@ -25,4 +25,16 @@ public class GameDifficulty
             break;
         }
     }
+    
+    public Map DifficultySelector(Difficulty gameDifficulty)
+    {
+        return gameDifficulty switch
+        {
+            Difficulty.Easy => Map.CreateEasyMap(),
+            Difficulty.Normal => Map.CreateNormalMap(),
+            Difficulty.Hard => Map.CreateHardMap(),
+            Difficulty.Expert => Map.CreateExpertMap(),
+            _ => Map.CreateNormalMap()
+        };
+    }
 }
