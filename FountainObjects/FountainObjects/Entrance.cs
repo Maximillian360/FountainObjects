@@ -21,6 +21,7 @@ public class Entrance : Tile, IInteractable
             Console.WriteLine("Cannot exit yet, the Fountain of Objects needs to be activated first!");
             return;
         }
-        Console.Write("Exitted...");
+        Console.Write("Exiting out of the caves... You won!");
+        player.WinState = true;
     }
 }

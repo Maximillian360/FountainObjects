@@ -13,7 +13,7 @@ public abstract class Tile : IInteractable
 
     public void Interact(Player player)
     {
-        Console.WriteLine($"{player.Position.X}, {player.Position.Y}: {InteractMessage}");
+        Console.WriteLine($"{InteractMessage}");
     }
 
     public virtual string OnTileEntered() => EnteredMessage;

@@ -13,7 +13,7 @@ static void PlayGame()
     Player? player = map.GetEntityByTile(new Position(0,0)) as Player;
     Renderer renderer = new Renderer(map);
 
-    while (true)
+    while (!player.WinState)
     {
         renderer.RenderWorldMap();
         player.TakePlayerInput(map);

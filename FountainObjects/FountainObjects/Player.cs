@@ -5,13 +5,13 @@ namespace FountainObjects;
 
 public class Player : Entity
 {
+    public bool WinState { get; set; } = false;
     public Player(string name) : base(name: name, type: Type.Player, maxHealth: 1, glyph: '@',
         position: new Position(0,0))
     {
-        
+    
     }
     
-
     public void TakePlayerInput(Map map)
     {
         while (true)
@@ -31,11 +31,9 @@ public class Player : Entity
             switch (playerInput.Action)
             {
                 case ActionType.Move:
-                    Console.WriteLine($"{playerInput.Action} is moving {playerInput.Position.X}, {playerInput.Position.Y}");
                     Move(map, playerInput.Position);
                     break;
                 case ActionType.Interact:
-                    Console.WriteLine($"{playerInput.Action} is interacting");
                     Interact(map, Position);
                     break;
                 case ActionType.Attack:
