@@ -13,15 +13,8 @@ public class Fountain : Tile, IInteractable
 
     public void Interact(Player player)
     {
-        EnteredMessage = (EnteredMessage == FountainInactiveMessage) ?  FountainInactiveMessage : FountainActiveMessage;
+        EnteredMessage = (EnteredMessage == FountainInactiveMessage) ?  FountainActiveMessage : FountainInactiveMessage;
+        Console.WriteLine(EnteredMessage);
     }
-    
-
-    // public void Interact(Player player, Entrance entrance)
-    // {
-    //     EnteredMessage = (EnteredMessage == FountainInactiveMessage) ?  FountainInactiveMessage : FountainActiveMessage;
-    //     entrance.ExitActivated();
-    //
-    // }
     
 }

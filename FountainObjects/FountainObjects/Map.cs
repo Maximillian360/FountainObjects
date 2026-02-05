@@ -104,6 +104,16 @@ public class Map
         WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition, GetTile(newPosition));
     }
 
+    public void SetExit()
+    {
+        if (WorldMap[0, 0] is Entrance entrance)
+        {
+            entrance.ToggleExitState();
+        }
+        Console.WriteLine("Exit toggled.");
+    }
+    
+
     public void SenseNearbyTiles(Position position)
     {
         for (int i = 0; i < 3 ; i++)

@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Net.Mime;
+using System.Reflection.Metadata.Ecma335;
 
 namespace FountainObjects;
 
@@ -35,6 +36,7 @@ public class Player : Entity
                     break;
                 case ActionType.Interact:
                     Console.WriteLine($"{playerInput.Action} is interacting");
+                    Interact(map, Position);
                     break;
                 case ActionType.Attack:
                     Console.WriteLine($"{playerInput.Action} is attacking");
@@ -60,7 +62,17 @@ public class Player : Entity
 
     public void Interact(Map map, Position position)
     {
-        
+        if (map.GetTile(position) is IInteractable interactable)
+        {
+            interactable.Interact(this);
+            if (position == new Position(map.WorldMapRows - 1, map.WorldMapCols - 1))
+            {
+                map.SetExit();
+            }
+            
+            return;
+        }
+        Console.WriteLine($"Tile in Position: {position} and Type: {map.GetTile(position)} is not interactable!");
     }
 
     public void Attack(Map map, Position position)

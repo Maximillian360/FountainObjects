@@ -9,27 +9,18 @@ public class Entrance : Tile, IInteractable
         EnteredMessage = "You see light in this room coming from outside the cavern. This is the entrance.";
     }
     
-    public void ExitActivated()
+    public void ToggleExitState()
     {
         _isExitActive = !_isExitActive;
     }
-
+    //
     public void Interact(Player player)
     {
         if (_isExitActive == false)
         {
             Console.WriteLine("Cannot exit yet, the Fountain of Objects needs to be activated first!");
+            return;
         }
         Console.Write("Exitted...");
     }
-    
-    // public bool OnExit()
-    // {
-    //     if (_isExitActive == false)
-    //     {
-    //         Console.WriteLine("Cannot exit yet, the Fountain of Objects needs to be activated first!");
-    //         return false;
-    //     }
-    //     return true;
-    // }
 }
