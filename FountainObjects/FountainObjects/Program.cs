@@ -11,18 +11,20 @@ static void PlayGame()
 {
     GameDifficulty gameDifficulty = new GameDifficulty();
     Map map = gameDifficulty.DifficultySelector(gameDifficulty.Difficulty);
-    // Map map = new Map(worldMapRows: 4, worldMapCols: 4);
     Player? player = map.GetEntityByTile(new Position(0,0)) as Player;
     Renderer renderer = new Renderer(map);
 
-    while (!player.WinState)
+    while (!player.WinState || player.Health >= 1)
     {
         renderer.RenderWorldMap();
         player.TakePlayerInput(map);
-        // break;
-        // Position position = player.TakePlayerInput();
-        // map.TryUpdatePosition(position, player);
     }
+
+    if (player.Health <= 0)
+    {
+        Console.WriteLine("You Died!");
+    }
+    
 }
 
 

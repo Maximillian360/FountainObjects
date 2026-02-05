@@ -13,7 +13,7 @@ public class Fountain : Tile, IInteractable
         SenseMessage = "The Fountain of Objects is nearby...";
     }
 
-    public void Interact(Player player)
+    public new void Interact(Player player)
     {
         EnteredMessage = (EnteredMessage == FountainInactiveMessage) ?  FountainActiveMessage : FountainInactiveMessage;
         Console.WriteLine(EnteredMessage);

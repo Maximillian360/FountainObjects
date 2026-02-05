@@ -48,7 +48,6 @@ public class Player : Entity
                     Console.WriteLine($"{playerInput.Action} is unknown");
                     break;
             }
-
             break;
         }
     }
@@ -62,6 +61,7 @@ public class Player : Entity
         }
         
     }
+
 
     public void Interact(Map map, Position position)
     {
