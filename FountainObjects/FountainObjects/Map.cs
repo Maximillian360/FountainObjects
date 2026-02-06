@@ -8,12 +8,16 @@ public class Map
     public int WorldMapRows { get; private set; }
     public int WorldMapCols { get; private set; }
     public Tile[,] WorldMap { get; private set; }
+    
+    public int PitLimit { get; private set; }
+    public int PitCounter { get; private set; } = 0;
 
-    public Map(int worldMapRows, int worldMapCols)
+    public Map(int worldMapRows, int worldMapCols, int pitLimit)
     {
         WorldMapRows = worldMapRows;
         WorldMapCols = worldMapCols;
         WorldMap = new Tile[WorldMapRows, WorldMapCols];
+        PitLimit = 1;
         GenerateMap();
     }
     
@@ -137,38 +141,61 @@ public class Map
     public void GenerateMap()
     {
         var player = new Player("Player");
-        WorldMap[0, 0] = new Entrance();
+        WorldMap[0, 0] = GenerateEntrance(0,0);
         TryPlaceEntity(new Position(0, 0), player);
+        int defaultCounterValue = 4;
+        int counter = defaultCounterValue;
+        Random random = new Random();
         for (int i = 0; i < WorldMapRows; i++)
         {
             for (int j = 0; j < WorldMapCols; j++)
             {
-                if (i == 0 && j == 0) continue;
+                if (counter <= 0) counter = defaultCounterValue;
+                
+                int randomNumber = random.Next(1, counter);
+                
 
                 if (i == WorldMapRows - 1 && j == WorldMapCols - 1)
                 {
-                    WorldMap[i, j] = new Fountain();
+                    WorldMap[i, j] = GenerateFountain(i, j);
                 }
                 
-                if (GetTile(new Position(i, j)) == null)
-                {
-                    WorldMap[i, j] = new Ground();
-                }
+                if (GetEntityByTile(new Position(i, j)) != null) continue;
                 
-                // if (GetEntityByTile(new Position(i, j)) != null)
-                // {
-                //     continue;
-                // }
-
+                RandomTileGenerator(i, j, ref counter, randomNumber, defaultCounterValue);
                 
             }
         }
     }
 
-    public static Map CreateEasyMap() => new Map(4, 4);
-    public static Map CreateNormalMap() => new Map(6, 6);
-    public static Map CreateHardMap() => new Map(8, 8);
-    public static Map CreateExpertMap() => new Map(10, 10);
+    private void RandomTileGenerator(int i, int j, ref int counter, int randomNumber, int defaultCounterValue)
+    {
+        if (GetTile(new Position(i, j)) == null && PitCounter < PitLimit && randomNumber == counter)
+        {
+            WorldMap[i, j] = GeneratePit(i, j);
+            PitCounter++;
+            counter = defaultCounterValue;
+        }
+        
+        if (GetTile(new Position(i, j)) == null)
+        {
+            WorldMap[i, j] = GenerateGround(i, j);
+            counter--;
+        }
+    }
+
+    private Fountain GenerateFountain(int i, int j) => new Fountain();
+    
+    private Ground GenerateGround(int i, int j) => new Ground();
+    
+    private Pit GeneratePit(int i, int j) => new Pit();
+    
+    private Entrance GenerateEntrance(int i, int j) => new Entrance();
+
+    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1);
+    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2);
+    public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4);
+    public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5);
 
 
 }

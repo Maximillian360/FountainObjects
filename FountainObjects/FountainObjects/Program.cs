@@ -14,7 +14,7 @@ static void PlayGame()
     Player? player = map.GetEntityByTile(new Position(0,0)) as Player;
     Renderer renderer = new Renderer(map);
 
-    while (!player.WinState || player.Health >= 1)
+    while (!player.WinState && player.Health >= 1)
     {
         renderer.RenderWorldMap();
         player.TakePlayerInput(map);

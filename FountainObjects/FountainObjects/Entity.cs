@@ -28,11 +28,11 @@ public abstract class Entity
     public void PositionUpdate(Position newPosition, Tile? tile)
     {
         Position = newPosition;
-        string message = tile.OnTileEntered();
+        string message = tile.OnTileEntered(this as Player);
         Console.WriteLine(message);
     }
     
-    public void TakeDamage(Map map, Position position)
+    public void TakeDamage()
     {
         Health -= 1;
     }

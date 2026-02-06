@@ -57,7 +57,6 @@ public class Player : Entity
         if (position != null)
         {
             map.TryUpdatePosition(position, this);
-            return;
         }
         
     }

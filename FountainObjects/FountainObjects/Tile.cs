@@ -26,5 +26,5 @@ public abstract class Tile : IInteractable
         return SenseMessage;
     }
 
-    public virtual string OnTileEntered() => EnteredMessage;
+    public virtual string OnTileEntered(Player player) => EnteredMessage;
 }
