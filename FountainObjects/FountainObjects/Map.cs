@@ -11,13 +11,16 @@ public class Map
     
     public int PitLimit { get; private set; }
     public int PitCounter { get; private set; } = 0;
+    public int AmarokLimit { get; private set; }
+    public int AmarokCounter { get; private set; } = 0;
 
-    public Map(int worldMapRows, int worldMapCols, int pitLimit)
+    public Map(int worldMapRows, int worldMapCols, int pitLimit, int amarokLimit)
     {
         WorldMapRows = worldMapRows;
         WorldMapCols = worldMapCols;
         WorldMap = new Tile[WorldMapRows, WorldMapCols];
         PitLimit = pitLimit;
+        AmarokLimit = amarokLimit;
         GenerateMap();
     }
     
@@ -140,7 +143,7 @@ public class Map
 
     public void GenerateMap()
     {
-        var player = new Player("Player");
+        var player = new Player("Player", '@');
         WorldMap[0, 0] = GenerateEntrance(0,0);
         TryPlaceEntity(new Position(0, 0), player);
         Random random = new Random();
@@ -178,10 +181,10 @@ public class Map
     
     private Entrance GenerateEntrance(int i, int j) => new Entrance();
 
-    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1);
-    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2);
-    public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4);
-    public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5);
+    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1, amarokLimit: 1);
+    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2, amarokLimit: 2);
+    public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4, amarokLimit: 3);
+    public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5, amarokLimit: 4);
 
 
 }

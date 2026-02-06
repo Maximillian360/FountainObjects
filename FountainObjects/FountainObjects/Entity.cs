@@ -12,15 +12,15 @@ public abstract class Entity
     private static int Counter { get; set; } = 1;
     public string EntitySenseMessage { get; set; }
 
-    public Entity (string name, Type type, int maxHealth , Position position, char glyph = '@')
+    public Entity (string name, Type type, int maxHealth)
     {
         Id = Counter;
         Name = name;
         Type = type;
-        Glyph = glyph;
+        Glyph = ' ';
         MaxHealth = maxHealth;
         Health = MaxHealth;
-        Position = position;
+        Position = new Position(0, 0);
         Counter++;
         EntitySenseMessage = $"Entity {Type} is nearby...";
     }
