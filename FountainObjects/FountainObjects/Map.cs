@@ -17,7 +17,7 @@ public class Map
         WorldMapRows = worldMapRows;
         WorldMapCols = worldMapCols;
         WorldMap = new Tile[WorldMapRows, WorldMapCols];
-        PitLimit = 1;
+        PitLimit = pitLimit;
         GenerateMap();
     }
     
@@ -143,44 +143,30 @@ public class Map
         var player = new Player("Player");
         WorldMap[0, 0] = GenerateEntrance(0,0);
         TryPlaceEntity(new Position(0, 0), player);
-        int defaultCounterValue = 4;
-        int counter = defaultCounterValue;
         Random random = new Random();
         for (int i = 0; i < WorldMapRows; i++)
         {
             for (int j = 0; j < WorldMapCols; j++)
             {
-                if (counter <= 0) counter = defaultCounterValue;
+                if (GetEntityByTile(new Position(i, j)) != null) continue;
                 
-                int randomNumber = random.Next(1, counter);
-                
-
                 if (i == WorldMapRows - 1 && j == WorldMapCols - 1)
                 {
                     WorldMap[i, j] = GenerateFountain(i, j);
                 }
                 
-                if (GetEntityByTile(new Position(i, j)) != null) continue;
-                
-                RandomTileGenerator(i, j, ref counter, randomNumber, defaultCounterValue);
+                if (GetTile(new Position(i, j)) == null && PitCounter < PitLimit && random.Next(0, 5) == 0)
+                {
+                    WorldMap[i, j] = GeneratePit(i, j);
+                    PitCounter++;
+                }
+        
+                if (GetTile(new Position(i, j)) == null)
+                {
+                    WorldMap[i, j] = GenerateGround(i, j);
+                }
                 
             }
-        }
-    }
-
-    private void RandomTileGenerator(int i, int j, ref int counter, int randomNumber, int defaultCounterValue)
-    {
-        if (GetTile(new Position(i, j)) == null && PitCounter < PitLimit && randomNumber == counter)
-        {
-            WorldMap[i, j] = GeneratePit(i, j);
-            PitCounter++;
-            counter = defaultCounterValue;
-        }
-        
-        if (GetTile(new Position(i, j)) == null)
-        {
-            WorldMap[i, j] = GenerateGround(i, j);
-            counter--;
         }
     }
 
