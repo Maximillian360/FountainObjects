@@ -123,22 +123,37 @@ public class Map
 
     public void SenseNearbyTiles(Position position)
     {
+        Tile[] nearbyTiles = GetNearbyTiles(position);
+        foreach (Tile nearbyTile in nearbyTiles)
+        {
+            if (nearbyTile == null) continue;
+            string senseMessage = nearbyTile.GetSenseMessage();
+            if (senseMessage != "Nothing unusual.")
+            {
+                Console.WriteLine(senseMessage);
+            }
+        }
+    }
+
+    public Tile[] GetNearbyTiles(Position position)
+    {
+        Tile?[] nearbyTiles = new Tile[8];
+        int index = 0;
         for (int i = 0; i < 3 ; i++)
         {
             for (int j = 0; j < 3; j++)
             {
                 if (i == 1 && j == 1) continue;
-                if (!IsPositionInside(new Position(position.X + i - 1, position.Y + j - 1))) continue;
-                Tile? checkTile = GetTile(new Position(position.X + i - 1, position.Y + j - 1));
-                if (checkTile == null) continue;
-                
-                string senseMessage = checkTile.GetSenseMessage();
-                if (senseMessage != "Nothing unusual.")
+                if (!IsPositionInside(new Position(position.X + i - 1, position.Y + j - 1)))
                 {
-                    Console.WriteLine(senseMessage);
+                    nearbyTiles[index] = null;
                 }
+                Tile? checkTile = GetTile(new Position(position.X + i - 1, position.Y + j - 1));
+                nearbyTiles[index] = checkTile;
+                index++;
             }
         }
+        return nearbyTiles;
     }
 
     public void GenerateMap()

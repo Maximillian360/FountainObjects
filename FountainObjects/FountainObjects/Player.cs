@@ -8,7 +8,8 @@ public class Player : Entity
     public bool WinState { get; set; } = false;
     public Player(string name, char glyph) : base(name: name, type: Type.Player, maxHealth: 1)
     {
-    
+        Glyph  = glyph;
+            
     }
 
 
