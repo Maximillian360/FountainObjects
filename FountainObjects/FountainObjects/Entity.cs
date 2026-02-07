@@ -22,7 +22,7 @@ public abstract class Entity
         Health = MaxHealth;
         Position = new Position(0, 0);
         Counter++;
-        EntitySenseMessage = $"Entity {Type} is nearby...";
+        EntitySenseMessage = $"Nothing unusual...";
     }
 
     public void PositionUpdate(Position newPosition, Tile? tile)
@@ -30,6 +30,15 @@ public abstract class Entity
         Position = newPosition;
         string message = tile.OnTileEntered(this as Player);
         Console.WriteLine(message);
+    }
+    
+    protected void Move(Map map, Position position)
+    {
+        if (position != null)
+        {
+            map.TryUpdatePosition(position, this);
+        }
+        
     }
     
     public void TakeDamage()

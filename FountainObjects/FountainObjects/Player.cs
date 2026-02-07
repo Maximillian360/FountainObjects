@@ -52,17 +52,10 @@ public class Player : Entity
         }
     }
 
-    public void Move(Map map, Position position)
-    {
-        if (position != null)
-        {
-            map.TryUpdatePosition(position, this);
-        }
-        
-    }
 
 
-    public void Interact(Map map, Position position)
+
+    private void Interact(Map map, Position position)
     {
         if (map.GetTile(position) is IInteractable interactable)
         {
@@ -77,7 +70,7 @@ public class Player : Entity
         Console.WriteLine($"Tile in Position: {position} and Type: {map.GetTile(position)} is not interactable!");
     }
 
-    public void Sense(Map map, Position position)
+    private void Sense(Map map, Position position)
     {
         map.SenseNearbyTiles(position);
     }

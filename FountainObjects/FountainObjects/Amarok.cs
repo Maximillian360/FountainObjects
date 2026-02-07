@@ -2,10 +2,10 @@
 
 public class Amarok : Entity
 {
-    public string SenseMessage { get; set; }
+    // public string SenseMessage { get; set; }
     public Amarok() : base(name: "Amarok", type: Type.Amarok, maxHealth: 1)
     {
-        SenseMessage = "You can smell the rotten stench of an amarok in a nearby room.";
+        EntitySenseMessage = "You can smell the rotten stench of an amarok in a nearby room.";
     }
     
     

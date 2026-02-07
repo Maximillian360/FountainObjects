@@ -12,7 +12,7 @@ public class Map
     public int PitLimit { get; private set; }
     public int PitCounter { get; private set; } = 0;
     public int AmarokLimit { get; private set; }
-    public int AmarokCounter { get; private set; } = 0;
+    public int AmarokCounter { get; private set; }
 
     public Map(int worldMapRows, int worldMapCols, int pitLimit, int amarokLimit)
     {
@@ -20,6 +20,7 @@ public class Map
         WorldMapCols = worldMapCols;
         WorldMap = new Tile[WorldMapRows, WorldMapCols];
         PitLimit = pitLimit;
+        AmarokCounter = 0;
         AmarokLimit = amarokLimit;
         GenerateMap();
     }
@@ -60,14 +61,27 @@ public class Map
 
     public void TryPlaceEntity(Position position, Entity? entity)
     {
-        if (GetTile(new Position(position.X, position.Y)) == null)
+        if (!IsPositionInside(position))
         {
-            Console.WriteLine("No tile found, cannot place entity.");
+            Console.WriteLine("Tile outside of bounds, cannot place entity.");
             return;
         }
+        
         if (entity == null)
         {
             Console.WriteLine("No entity found, cannot place entity.");
+            return;
+        }
+
+        if (GetTile(new Position(position.X, position.Y)) == null)
+        {
+            Console.WriteLine("Tile does not exist, cannot place entity.");
+            return;
+        }
+
+        if (GetTile(new Position(position.X, position.Y)) is Pit)
+        {
+            Console.WriteLine("Cannot place entity on pit");
             return;
         }
 
@@ -76,6 +90,7 @@ public class Map
             Console.WriteLine("Tile is occupied!");
             return;
         }
+        
         WorldMap[position.X, position.Y].Entity = entity;
         WorldMap[position.X, position.Y].Entity.PositionUpdate(position, GetTile(position));
     }
@@ -123,8 +138,8 @@ public class Map
 
     public void SenseNearbyTiles(Position position)
     {
-        Tile[] nearbyTiles = GetNearbyTiles(position);
-        foreach (Tile nearbyTile in nearbyTiles)
+        Tile?[] nearbyTiles = GetNearbyTiles(position);
+        foreach (Tile? nearbyTile in nearbyTiles)
         {
             if (nearbyTile == null) continue;
             string senseMessage = nearbyTile.GetSenseMessage();
@@ -135,7 +150,7 @@ public class Map
         }
     }
 
-    public Tile[] GetNearbyTiles(Position position)
+    public Tile?[] GetNearbyTiles(Position position)
     {
         Tile?[] nearbyTiles = new Tile[8];
         int index = 0;
@@ -155,7 +170,7 @@ public class Map
         }
         return nearbyTiles;
     }
-
+    
     public void GenerateMap()
     {
         var player = new Player("Player", '@');
@@ -183,7 +198,12 @@ public class Map
                 {
                     WorldMap[i, j] = GenerateGround(i, j);
                 }
-                
+
+                if (GetEntityByTile(new Position(i, j)) == null && AmarokCounter < AmarokLimit &&
+                    random.Next(0, 7) == 0)
+                {
+                    TryPlaceEntity(new Position(i, j), new Amarok());
+                }
             }
         }
     }
