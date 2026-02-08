@@ -115,12 +115,23 @@ public class Map
             Console.WriteLine("No tile found, cannot update position.");
             return;
         }
+
+        Entity? entityInPosition = GetEntityByTile(newPosition);
         
-        if (GetEntityByTile(newPosition) != null)
+        if (entityInPosition?.Type == Type.Amarok)
         {
-            Console.WriteLine("Tile is occupied!");
+            Console.WriteLine($"Tile is occupied by: {entityInPosition.Type}!");
+            entity.TakeDamage();
+            Console.WriteLine($"An {entityInPosition.Type} has attacked you!");
             return;
         }
+        
+        if (entityInPosition?.Type == Type.Maelstorm)
+        {
+            Console.WriteLine($"Tile is occupied by {entityInPosition.Type}!");
+            return;
+        }
+        
         WorldMap[newPosition.X, newPosition.Y].Entity = entity;
         WorldMap[entity.Position.X, entity.Position.Y].Entity = null;
         WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition, GetTile(newPosition));
@@ -203,6 +214,7 @@ public class Map
                     random.Next(0, 7) == 0)
                 {
                     TryPlaceEntity(new Position(i, j), new Amarok());
+                    AmarokCounter++;
                 }
             }
         }
