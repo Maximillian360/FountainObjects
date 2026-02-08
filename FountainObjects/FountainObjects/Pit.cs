@@ -11,7 +11,7 @@ public class Pit : Tile
         SenseMessage = "You can feel a draft of air pushing through nearby";
     }
 
-    public override string OnTileEntered(Player player)
+    public override string OnTileEntered(Entity player)
     {
         player.TakeDamage();
         return base.OnTileEntered(player);

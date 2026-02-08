@@ -10,18 +10,23 @@ public class Map
     public Tile[,] WorldMap { get; private set; }
     
     public int PitLimit { get; private set; }
-    public int PitCounter { get; private set; } = 0;
+    public int PitCounter { get; private set; }
     public int AmarokLimit { get; private set; }
     public int AmarokCounter { get; private set; }
+    public int MaelstormLimit { get; private set; }
+    public int MaelstormCounter { get; private set; }
 
-    public Map(int worldMapRows, int worldMapCols, int pitLimit, int amarokLimit)
+    public Map(int worldMapRows, int worldMapCols, int pitLimit, int amarokLimit, int maelstormLimit)
     {
         WorldMapRows = worldMapRows;
         WorldMapCols = worldMapCols;
         WorldMap = new Tile[WorldMapRows, WorldMapCols];
         PitLimit = pitLimit;
+        PitCounter = 0;
         AmarokCounter = 0;
         AmarokLimit = amarokLimit;
+        MaelstormLimit = maelstormLimit;
+        MaelstormCounter = 0;
         GenerateMap();
     }
     
@@ -197,12 +202,14 @@ public class Map
                 if (i == WorldMapRows - 1 && j == WorldMapCols - 1)
                 {
                     WorldMap[i, j] = GenerateFountain(i, j);
+                    continue;
                 }
                 
                 if (GetTile(new Position(i, j)) == null && PitCounter < PitLimit && random.Next(0, 5) == 0)
                 {
                     WorldMap[i, j] = GeneratePit(i, j);
                     PitCounter++;
+                    continue;
                 }
         
                 if (GetTile(new Position(i, j)) == null)
@@ -216,6 +223,12 @@ public class Map
                     TryPlaceEntity(new Position(i, j), new Amarok());
                     AmarokCounter++;
                 }
+
+                if (GetEntityByTile(new Position(i, j)) == null && MaelstormCounter < MaelstormLimit && random.Next(0, 10) == 0)
+                {
+                    TryPlaceEntity(new Position(i, j), new Maelstorm());
+                    MaelstormCounter++;
+                }
             }
         }
     }
@@ -228,10 +241,10 @@ public class Map
     
     private Entrance GenerateEntrance(int i, int j) => new Entrance();
 
-    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1, amarokLimit: 1);
-    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2, amarokLimit: 2);
-    public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4, amarokLimit: 3);
-    public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5, amarokLimit: 4);
+    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1, amarokLimit: 1, maelstormLimit: 0);
+    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2, amarokLimit: 2, maelstormLimit: 1);
+    public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4, amarokLimit: 3, maelstormLimit: 2);
+    public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5, amarokLimit: 4, maelstormLimit: 3);
 
 
 }

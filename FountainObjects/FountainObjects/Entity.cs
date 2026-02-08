@@ -25,10 +25,10 @@ public abstract class Entity
         EntitySenseMessage = $"Nothing unusual...";
     }
 
-    public void PositionUpdate(Position newPosition, Tile? tile)
+    public void PositionUpdate(Position newPosition, Tile tile)
     {
         Position = newPosition;
-        string message = tile.OnTileEntered(this as Player);
+        string message = tile.OnTileEntered(this);
         Console.WriteLine(message);
     }
     
