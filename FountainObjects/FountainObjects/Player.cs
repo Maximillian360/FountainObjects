@@ -6,13 +6,25 @@ namespace FountainObjects;
 public class Player : Entity
 {
     public bool WinState { get; set; } = false;
+    public Arrow[]  Arrows { get; set; }
+    private int ArrowLimit { get; init; }
     public Player(string name, char glyph) : base(name: name, type: Type.Player, maxHealth: 1)
     {
         Glyph  = glyph;
-            
+        ArrowLimit = 5;
+        Arrows = new Arrow[5];
+        MakeArrows(ArrowLimit);
+
     }
 
-
+    private void MakeArrows(int arrowLimit)
+    {
+        for (int i = 0; i < ArrowLimit; i++)
+        {
+            Arrows[i] = new Arrow(damage: 1, offset: new Position(0,0));
+        }
+    }
+    
     
     public void TakePlayerInput(Map map)
     {
