@@ -30,7 +30,7 @@ public class Map
         GenerateMap();
     }
     
-    public bool IsPositionInside (Position position) => position.X >= 0 &&  position.X < WorldMapCols && position.Y >= 0 && position.Y < WorldMapRows;
+    public bool IsPositionInside (Position position) => position.X >= 0 && position.X < WorldMapCols && position.Y >= 0 && position.Y < WorldMapRows;
 
     public Tile? GetTile(Position position) => IsPositionInside(position) ? WorldMap[position.X, position.Y] : null;
 
@@ -134,11 +134,36 @@ public class Map
         if (entityInPosition?.Type == Type.Maelstorm)
         {
             Console.WriteLine($"Tile is occupied by {entityInPosition.Type}!");
+            Position[] positions = MaelstormPush(entityInPosition, newPosition);
+            ActualMove(positions[0], entity);
+            ActualMove(positions[1], entityInPosition);
             return;
         }
-        
+        ActualMove(newPosition, entity);
+    }
+
+    public Position[] MaelstormPush(Entity maelstorm, Position newPosition)
+    {
+        int playerPushX = newPosition.X - 1;
+        int playerPushY = newPosition.Y + 2;
+        int maelstormPushX = maelstorm.Position.X + 1;
+        int maelstormPushY = maelstorm.Position.Y - 2;
+        Position playerPushOffset = new Position(
+            Math.Clamp(playerPushX, 0, WorldMapCols - 1),
+            Math.Clamp(playerPushY, 0, WorldMapRows - 1));
+        Position maelstormPushOffset = new Position(
+            Math.Clamp(maelstormPushX, 0, WorldMapCols - 1), 
+            Math.Clamp(maelstormPushY, 0, WorldMapRows - 1));
+        return new [] { playerPushOffset, maelstormPushOffset };
+    }
+
+    public void ActualMove(Position newPosition, Entity? entity)
+    {
         WorldMap[newPosition.X, newPosition.Y].Entity = entity;
-        WorldMap[entity.Position.X, entity.Position.Y].Entity = null;
+        if (!entity.Position.Equals(newPosition))
+        {
+            WorldMap[entity.Position.X, entity.Position.Y].Entity = null;
+        }
         WorldMap[newPosition.X, newPosition.Y].Entity.PositionUpdate(newPosition, GetTile(newPosition));
     }
 
@@ -241,8 +266,8 @@ public class Map
     
     private Entrance GenerateEntrance(int i, int j) => new Entrance();
 
-    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1, amarokLimit: 1, maelstormLimit: 0);
-    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2, amarokLimit: 2, maelstormLimit: 1);
+    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 0, amarokLimit: 0, maelstormLimit: 1);
+    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 0, amarokLimit: 0, maelstormLimit: 1);
     public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4, amarokLimit: 3, maelstormLimit: 2);
     public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5, amarokLimit: 4, maelstormLimit: 3);
 

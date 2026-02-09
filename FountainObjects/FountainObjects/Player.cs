@@ -52,9 +52,7 @@ public class Player : Entity
         }
     }
 
-
-
-
+    
     private void Interact(Map map, Position position)
     {
         if (map.GetTile(position) is IInteractable interactable)
