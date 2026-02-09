@@ -266,8 +266,8 @@ public class Map
     
     private Entrance GenerateEntrance(int i, int j) => new Entrance();
 
-    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 0, amarokLimit: 0, maelstormLimit: 1);
-    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 0, amarokLimit: 0, maelstormLimit: 1);
+    public static Map CreateEasyMap() => new Map(worldMapRows: 4, worldMapCols: 4, pitLimit: 1, amarokLimit: 1, maelstormLimit: 1);
+    public static Map CreateNormalMap() => new Map(worldMapRows:6, worldMapCols: 6, pitLimit: 2, amarokLimit: 2, maelstormLimit: 1);
     public static Map CreateHardMap() => new Map(worldMapRows:8, worldMapCols: 8, pitLimit: 4, amarokLimit: 3, maelstormLimit: 2);
     public static Map CreateExpertMap() => new Map(worldMapRows: 10, worldMapCols: 10, pitLimit: 5, amarokLimit: 4, maelstormLimit: 3);
 

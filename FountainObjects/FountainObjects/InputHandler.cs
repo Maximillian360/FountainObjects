@@ -7,16 +7,22 @@ public class InputHandler
         while (true)
         {
             PlayerCommand? command = ParseCommand(input);
-            if (command == null)
-            {
-                Console.WriteLine("Input not matched with any recognizable command!");
-                continue;
-            }
-            return command.Value;
+            if (command != null) return command.Value;
+            Console.WriteLine("Input not matched with any recognizable command!");
+            continue;
         }
     }
-
-
+    public PlayerCommand GetAttack(string input)
+    {
+        while (true)
+        {
+            PlayerCommand? command = ParseAttack(input);
+            if (command != null) return command.Value;
+            Console.WriteLine("Input not matched with any recognizable attack!");
+            continue;
+        }
+    }
+    
     private PlayerCommand ParseCommand(string input)
     {
         return input switch
@@ -29,6 +35,17 @@ public class InputHandler
             "sense" or "h" => new PlayerCommand(ActionType.Sense, new Position(0, 0)),
             "attack" or "v" => new PlayerCommand(ActionType.Attack, new Position(0, 0)),
             _ => new PlayerCommand(ActionType.None, new Position(0,0))
+        };
+    }
+
+    private PlayerCommand ParseAttack(string input)
+    {
+        return input switch
+        {
+            "north" or "w" => new PlayerCommand(ActionType.Attack, new Position(-1, 0)),
+            "south" or "s" => new PlayerCommand(ActionType.Attack, new Position(1, 0)),
+            "east" or "d" => new PlayerCommand(ActionType.Attack, new Position(0, 1)),
+            "west" or "a" => new PlayerCommand(ActionType.Attack, new Position(0, -1)),
         };
     }
 

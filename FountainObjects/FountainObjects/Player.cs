@@ -6,13 +6,13 @@ namespace FountainObjects;
 public class Player : Entity
 {
     public bool WinState { get; set; } = false;
-    public Arrow[]  Arrows { get; set; }
+    public List<Arrow> Arrows { get; set; }
     private int ArrowLimit { get; init; }
     public Player(string name, char glyph) : base(name: name, type: Type.Player, maxHealth: 1)
     {
         Glyph  = glyph;
         ArrowLimit = 5;
-        Arrows = new Arrow[5];
+        Arrows = new List<Arrow>();
         MakeArrows(ArrowLimit);
 
     }
@@ -21,7 +21,7 @@ public class Player : Entity
     {
         for (int i = 0; i < ArrowLimit; i++)
         {
-            Arrows[i] = new Arrow(damage: 1, offset: new Position(0,0));
+            Arrows.Add(new Arrow(damage: 1, offset: new Position(0, 0)));
         }
     }
     
@@ -31,7 +31,7 @@ public class Player : Entity
         while (true)
         {
             Console.WriteLine("");
-            Console.WriteLine("Type W or North, D or East, S or South, A  West to move. ");
+            Console.WriteLine("Type W or North, D or East, S or South, A or West to move. ");
             Console.WriteLine("I or Interact, H for Sense, and V or Attack.");
             string? input = Console.ReadLine()?.Trim().ToLower();
             if (string.IsNullOrWhiteSpace(input))
@@ -40,12 +40,12 @@ public class Player : Entity
                 continue;
             }
             InputHandler inputHandler = new InputHandler();
-            PlayerCommand playerInput = inputHandler.GetCommand(input);
-
-            switch (playerInput.Action)
+            PlayerCommand playerCommand = inputHandler.GetCommand(input);
+            
+            switch (playerCommand.Action)
             {
                 case ActionType.Move:
-                    Move(map, playerInput.Position);
+                    Move(map, playerCommand.Position);
                     break;
                 case ActionType.Interact:
                     Interact(map, Position);
@@ -54,10 +54,19 @@ public class Player : Entity
                     Sense(map, Position);
                     break;
                 case ActionType.Attack:
-                    Console.WriteLine($"{playerInput.Action} is attacking");
+                    Console.WriteLine("");
+                    Console.WriteLine("Type W or North, D or East, S or South, A or West to shoot. ");
+                    string? attackInput = Console.ReadLine()?.Trim().ToLower();
+                    if (string.IsNullOrWhiteSpace(attackInput))
+                    {
+                        Console.WriteLine("Attack direction cannot be empty!");
+                        continue;
+                    }
+                    PlayerCommand attackCommand = inputHandler.GetAttack(attackInput);
+                    Attack(map, attackCommand.Position);
                     break;
                 default:
-                    Console.WriteLine($"{playerInput.Action} is unknown");
+                    Console.WriteLine($"{playerCommand.Action} is unknown");
                     break;
             }
             break;
@@ -87,7 +96,22 @@ public class Player : Entity
 
     public void Attack(Map map, Position position)
     {
-        
+        Tile? tile = map.GetTile(position);
+        if (tile == null)
+        {
+            Console.WriteLine("Tile not found!");
+            return;
+        }
+        Entity? entity = tile.Entity;
+        if (entity == null)
+        {
+            Console.WriteLine("Arrow hit no entity!");
+            Arrows.RemoveAt(0);
+            return;
+        }
+        entity.TakeDamage();
+        map.WorldMap[position.X, position.Y].CheckEntityDead(map);
+        Arrows.RemoveAt(0);
     }
     
 }

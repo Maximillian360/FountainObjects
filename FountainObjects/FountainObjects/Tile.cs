@@ -17,6 +17,14 @@ public abstract class Tile : IInteractable
         Console.WriteLine($"{InteractMessage}");
     }
 
+    public void CheckEntityDead(Map map)
+    {
+        if (Entity.Health <= 0)
+        {
+            map.WorldMap[Entity.Position.X, Entity.Position.Y].Entity = null;
+        }
+    }
+
     public string GetSenseMessage()
     {
         if (Entity != null)
