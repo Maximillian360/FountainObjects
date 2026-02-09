@@ -54,6 +54,11 @@ public class Player : Entity
                     Sense(map, Position);
                     break;
                 case ActionType.Attack:
+                    if (Arrows.Count <= 0)
+                    {
+                        Console.WriteLine("No arrows left!");
+                        continue;
+                    }
                     Console.WriteLine("");
                     Console.WriteLine("Type W or North, D or East, S or South, A or West to shoot. ");
                     string? attackInput = Console.ReadLine()?.Trim().ToLower();
@@ -63,7 +68,7 @@ public class Player : Entity
                         continue;
                     }
                     PlayerCommand attackCommand = inputHandler.GetAttack(attackInput);
-                    Attack(map, attackCommand.Position);
+                    Attack(map, new Position (attackCommand.Position.X + Position.X, attackCommand.Position.Y + Position.Y));
                     break;
                 default:
                     Console.WriteLine($"{playerCommand.Action} is unknown");
