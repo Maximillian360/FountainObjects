@@ -27,7 +27,6 @@ public class Renderer
             }
             Console.WriteLine();
         }
-        
         // foreach (string message in messages) Console.WriteLine(message);
     }
 }
