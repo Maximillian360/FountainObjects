@@ -6,25 +6,15 @@ namespace FountainObjects;
 public class Player : Entity
 {
     public bool WinState { get; set; } = false;
-    public List<Arrow> Arrows { get; set; }
+    public int Arrows { get; private set; } = 0;
+    // public List<Arrow> Arrows { get; set; }
     private int ArrowLimit { get; init; }
     public Player(string name, char glyph) : base(name: name, type: Type.Player, maxHealth: 1)
     {
         Glyph  = glyph;
         ArrowLimit = 5;
-        Arrows = new List<Arrow>();
-        MakeArrows(ArrowLimit);
-
+        Arrows = ArrowLimit;
     }
-
-    private void MakeArrows(int arrowLimit)
-    {
-        for (int i = 0; i < ArrowLimit; i++)
-        {
-            Arrows.Add(new Arrow(damage: 1, offset: new Position(0, 0)));
-        }
-    }
-    
     
     public void TakePlayerInput(Map map)
     {
@@ -54,7 +44,7 @@ public class Player : Entity
                     Sense(map, Position);
                     break;
                 case ActionType.Attack:
-                    if (Arrows.Count <= 0)
+                    if (Arrows <= 0)
                     {
                         Console.WriteLine("No arrows left!");
                         continue;
@@ -111,12 +101,12 @@ public class Player : Entity
         if (entity == null)
         {
             Console.WriteLine("Arrow hit no entity!");
-            Arrows.RemoveAt(0);
+            Arrows--;
             return;
         }
         entity.TakeDamage();
         map.WorldMap[position.X, position.Y].CheckEntityDead(map);
-        Arrows.RemoveAt(0);
+        Arrows--;
     }
     
 }
