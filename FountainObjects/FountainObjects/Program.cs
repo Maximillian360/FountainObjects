@@ -1,5 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+
+global using FountainObjects.Core.Entities;
+global using FountainObjects.Core.Tiles;
+global using FountainObjects.Core.Values;
+global using FountainObjects.Core.Enums;
+global using FountainObjects.GameLogic.Map;
 using FountainObjects;
 
 Console.WriteLine("Hello, World!");

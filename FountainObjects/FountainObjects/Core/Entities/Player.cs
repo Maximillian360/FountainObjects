@@ -1,7 +1,7 @@
 ﻿using System.Net.Mime;
 using System.Reflection.Metadata.Ecma335;
 
-namespace FountainObjects;
+namespace FountainObjects.Core.Entities;
 
 public class Player : Entity
 {
@@ -9,7 +9,7 @@ public class Player : Entity
     public int Arrows { get; private set; } = 0;
     // public List<Arrow> Arrows { get; set; }
     private int ArrowLimit { get; init; }
-    public Player(string name, char glyph) : base(name: name, type: Type.Player, maxHealth: 1)
+    public Player(string name, char glyph) : base(name: name, type: Core.Enums.Type.Player, maxHealth: 1)
     {
         Glyph  = glyph;
         ArrowLimit = 5;

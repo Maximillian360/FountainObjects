@@ -1,4 +1,6 @@
-﻿namespace FountainObjects;
+﻿using Type = FountainObjects.Core.Enums.Type;
+
+namespace FountainObjects.Core.Entities;
 
 public abstract class Entity
 {
@@ -47,12 +49,4 @@ public abstract class Entity
     }
 
     
-}
-
-
-public enum Type
-{
-    Player,
-    Maelstorm,
-    Amarok
 }

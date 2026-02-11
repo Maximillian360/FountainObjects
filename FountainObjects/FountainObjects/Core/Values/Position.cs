@@ -1,4 +1,4 @@
-﻿namespace FountainObjects;
+﻿namespace FountainObjects.Core.Values;
 
 public readonly record struct Position
 {

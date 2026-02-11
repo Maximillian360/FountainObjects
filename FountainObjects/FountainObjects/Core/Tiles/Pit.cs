@@ -1,4 +1,4 @@
-﻿namespace FountainObjects;
+﻿namespace FountainObjects.Core.Tiles;
 
 public class Pit : Tile
 {

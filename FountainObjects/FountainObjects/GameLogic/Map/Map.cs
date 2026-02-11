@@ -1,7 +1,8 @@
 ﻿using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
+using FountainObjects.Core.Entities;
 
-namespace FountainObjects;
+namespace FountainObjects.GameLogic.Map;
 
 public class Map
 {
@@ -123,7 +124,7 @@ public class Map
 
         Entity? entityInPosition = GetEntityByTile(newPosition);
         
-        if (entityInPosition?.Type == Type.Amarok)
+        if (entityInPosition?.Type == Core.Enums.Type.Amarok)
         {
             Console.WriteLine($"Tile is occupied by: {entityInPosition.Type}!");
             entity.TakeDamage();
@@ -131,7 +132,7 @@ public class Map
             return;
         }
         
-        if (entityInPosition?.Type == Type.Maelstorm)
+        if (entityInPosition?.Type == Core.Enums.Type.Maelstorm)
         {
             Console.WriteLine($"Tile is occupied by {entityInPosition.Type}!");
             Position[] positions = MaelstormPush(entityInPosition, newPosition);
